@@ -79,5 +79,21 @@ Consolidated curriculum tree for Python and SQL tracks.
 - [06 Pooling Prod Config](./sql/sqlalchemy-postgres/06_pooling_prod_config.md)
 - [07 Sql Injection Protection](./sql/sqlalchemy-postgres/07_sql_injection_protection.md)
 
+
+## API
+- [endpoint-best-practices](./api/endpoint-best-practices/README.md)
+
+### API Endpoint Best Practices
+- [01 Api Design Principles And Resource Modeling](./api/endpoint-best-practices/01_api_design_principles.md)
+- [02 Pagination Limit Offset Cursor](./api/endpoint-best-practices/02_pagination_limit_offset_cursor.md)
+- [03 Search Filter Sort For Dashboards](./api/endpoint-best-practices/03_search_filter_sort_for_dashboards.md)
+- [04 Field Selection And Response Shaping](./api/endpoint-best-practices/04_field_selection_and_response_shaping.md)
+- [05 Indexing Query Plans And Db Patterns](./api/endpoint-best-practices/05_indexing_query_plans_and_db_patterns.md)
+- [06 Caching Conditional Requests Etags](./api/endpoint-best-practices/06_caching_conditional_requests_etags.md)
+- [07 Rate Limits Timeouts And Resilience](./api/endpoint-best-practices/07_rate_limits_timeouts_and_resilience.md)
+- [08 Validation Errors And Observability](./api/endpoint-best-practices/08_validation_errors_and_observability.md)
+- [09 Security Authz And Data Exposure](./api/endpoint-best-practices/09_security_authz_and_data_exposure.md)
+- [10 Api Contract Testing And Versioning](./api/endpoint-best-practices/10_api_contract_testing_and_versioning.md)
 ## Notes
 - Source repos are preserved individually; this repo provides a single organized tree.
+
