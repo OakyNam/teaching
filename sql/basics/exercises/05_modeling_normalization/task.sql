@@ -1,7 +1,11 @@
 -- Lesson 05 Exercises: data modeling and normalization
 
 -- A denormalized staging table to show why normalized tables are useful.
-DROP TABLE IF EXISTS raw_order_lines, order_items, orders, products, customers CASCADE;
+DROP TABLE IF EXISTS raw_order_lines CASCADE;
+DROP TABLE IF EXISTS order_items CASCADE;
+DROP TABLE IF EXISTS orders CASCADE;
+DROP TABLE IF EXISTS products CASCADE;
+DROP TABLE IF EXISTS customers CASCADE;
 
 CREATE TABLE raw_order_lines (
     order_id INT,

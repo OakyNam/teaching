@@ -1,7 +1,10 @@
 -- Lesson 03 Exercises: JOINs
 
 -- Shared e-commerce dataset used throughout the SQL basics lessons.
-DROP TABLE IF EXISTS order_items, orders, products, customers CASCADE;
+DROP TABLE IF EXISTS order_items CASCADE;
+DROP TABLE IF EXISTS orders CASCADE;
+DROP TABLE IF EXISTS products CASCADE;
+DROP TABLE IF EXISTS customers CASCADE;
 
 CREATE TABLE customers (
     id INT PRIMARY KEY,
