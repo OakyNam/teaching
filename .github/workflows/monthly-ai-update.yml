@@ -1,0 +1,124 @@
+name: Monthly AI Repo Update
+
+on:
+  schedule:
+    - cron: '0 9 1 * *'
+  workflow_dispatch:
+    inputs:
+      focus_area:
+        description: Specific area to focus on (optional)
+        required: false
+        default: all
+      create_pr:
+        description: Ask the agent to open a PR if meaningful updates are found
+        required: false
+        default: 'true'
+
+jobs:
+  create-audit-issue:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Get current month/year
+        id: date
+        run: echo "period=$(date +'%B %Y')" >> "$GITHUB_OUTPUT"
+
+      - name: Create monthly audit issue for Copilot agent
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const period = '${{ steps.date.outputs.period }}';
+            const focusArea = '${{ github.event.inputs.focus_area || 'all' }}';
+            const createPr = '${{ github.event.inputs.create_pr || 'true' }}';
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const title = `Monthly Teaching Repo Audit - ${period}`;
+            const labels = [
+              { name: 'copilot', color: '5319e7', description: 'Triggers Copilot automation' },
+              { name: 'monthly-audit', color: '0e8a16', description: 'Monthly content audit issue' },
+              { name: 'enhancement', color: 'a2eeef', description: 'Requested improvement' },
+            ];
+
+            for (const label of labels) {
+              try {
+                await github.rest.issues.getLabel({ owner, repo, name: label.name });
+              } catch (error) {
+                if (error.status === 404) {
+                  await github.rest.issues.createLabel({ owner, repo, ...label });
+                } else {
+                  throw error;
+                }
+              }
+            }
+
+            const existing = await github.rest.search.issuesAndPullRequests({
+              q: `repo:${owner}/${repo} is:issue in:title "${title}"`,
+              per_page: 1,
+            });
+
+            if (existing.data.items.length > 0) {
+              core.info(`Audit issue already exists for ${period}: ${existing.data.items[0].html_url}`);
+              return;
+            }
+
+            const issueBody = [
+              `## Monthly Teaching Repo Audit — ${period}`,
+              '',
+              '@github-copilot This is the monthly automated audit of the teaching repository. Please complete the following tasks:',
+              '',
+              '### 1. Completeness Audit',
+              '- Review all lesson markdown files for placeholder content (look for `TODO`, thin content, missing sections)',
+              '- Check all `examples/`, `exercises/`, and `solutions/` code files for scaffold or placeholder code',
+              '- Complete any files that are still stubs',
+              '',
+              '### 2. Accuracy Review',
+              '- Check Python lessons for deprecated patterns and outdated APIs',
+              '- Verify AWS (RDS/ECS) lesson content reflects current AWS console, CLI, and operational guidance',
+              '- Review API and DevOps best practices against current industry standards',
+              '',
+              '### 3. New Content Research',
+              `Focus area this month: **${focusArea}**`,
+              '',
+              'Research and identify if any of the following should be added or updated:',
+              '- New Python features from recent releases (3.11+, 3.12+, 3.13+)',
+              '- Emerging DevOps and NetOps patterns (GitOps, Platform Engineering, eBPF, OpenTelemetry, etc.)',
+              '- New AWS services or features relevant to RDS and ECS users',
+              '- AI agent frameworks and patterns with real adoption (LangGraph, Anthropic tool use, webapp agent design)',
+              '- Security best-practice updates',
+              '',
+              '### 4. New Lessons to Consider Adding',
+              'Based on your research, propose new lessons if warranted:',
+              '- OpenTelemetry',
+              '- Terraform for AWS',
+              '- GitHub Actions CI/CD patterns',
+              '- Docker Compose for local development',
+              '- Python 3.12+ features',
+              '- Async patterns for AI agents',
+              '',
+              '### 5. Deliverables',
+              'Create a structured GitHub issue comment summary and, if appropriate, a PR with:',
+              '- Completed placeholder files',
+              '- Updated content where needed',
+              '- New lesson files if warranted (follow existing structure: lesson markdown + examples + exercises + solutions)',
+              '- Updated README files to include any new lessons',
+              '',
+              '### 6. Execution Notes',
+              '- Prioritize: (1) completing placeholders, (2) accuracy fixes, (3) new content',
+              `- If \`create_pr\` is **${createPr}**, open a PR for meaningful content updates`,
+              '- Cite official docs, release notes, or reputable sources in the summary when possible',
+            ].join('\n');
+
+            const issue = await github.rest.issues.create({
+              owner,
+              repo,
+              title,
+              body: issueBody,
+              labels: labels.map(label => label.name),
+            });
+
+            core.info(`Created issue ${issue.data.html_url}`);
