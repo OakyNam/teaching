@@ -1,8 +1,9 @@
-﻿# API Endpoint Best Practices
+# API Endpoint Best Practices
 
 Production-focused lessons for building fast and safe API endpoints, with emphasis on pagination and dashboard GET query performance.
 
 ## Lessons
+- [Rest Fundamentals](./00_rest_fundamentals.md)
 - [Api Design Principles](./01_api_design_principles.md)
 - [Pagination Limit Offset Cursor](./02_pagination_limit_offset_cursor.md)
 - [Search Filter Sort For Dashboards](./03_search_filter_sort_for_dashboards.md)

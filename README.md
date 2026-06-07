@@ -1,6 +1,6 @@
-﻿# Teaching
+# Teaching
 
-Consolidated curriculum tree for Python and SQL tracks.
+Consolidated curriculum tree for Python, SQL, AWS, and AI agent tracks.
 
 ## Python
 - [basics](./python/basics/README.md)
@@ -11,6 +11,14 @@ Consolidated curriculum tree for Python and SQL tracks.
 ## SQL
 - [basics](./sql/basics/README.md)
 - [sqlalchemy-postgres](./sql/sqlalchemy-postgres/README.md)
+
+## AWS
+- [aws](./aws/README.md)
+- [rds](./aws/rds/README.md)
+- [ecs](./aws/ecs/README.md)
+
+## AI Agents
+- [ai-agents](./ai-agents/README.md)
 
 ## Root Lesson Index
 
@@ -79,6 +87,24 @@ Consolidated curriculum tree for Python and SQL tracks.
 - [06 Pooling Prod Config](./sql/sqlalchemy-postgres/06_pooling_prod_config.md)
 - [07 Sql Injection Protection](./sql/sqlalchemy-postgres/07_sql_injection_protection.md)
 
+### AWS RDS
+- [01 Rds Overview](./aws/rds/01_rds_overview.md)
+- [02 Creating Rds Instance](./aws/rds/02_creating_rds_instance.md)
+- [03 Connecting And Operations](./aws/rds/03_connecting_and_operations.md)
+- [04 Rds Best Practices](./aws/rds/04_rds_best_practices.md)
+
+### AWS ECS
+- [01 Ecs Overview](./aws/ecs/01_ecs_overview.md)
+- [02 Task Definitions](./aws/ecs/02_task_definitions.md)
+- [03 Deploying Services](./aws/ecs/03_deploying_services.md)
+- [04 Ecs Best Practices](./aws/ecs/04_ecs_best_practices.md)
+
+### AI Agents
+- [01 Agentic Concepts](./ai-agents/01_agentic_concepts.md)
+- [02 Function Calling And Tools](./ai-agents/02_function_calling_and_tools.md)
+- [03 Building Agents In A Webapp](./ai-agents/03_building_agents_in_webapp.md)
+- [04 Agentic Workflows With LangGraph](./ai-agents/04_agentic_workflows_with_langgraph.md)
+- [05 Rag And Knowledge Agents](./ai-agents/05_rag_and_knowledge_agents.md)
 
 ## API
 - [endpoint-best-practices](./api/endpoint-best-practices/README.md)
@@ -94,6 +120,7 @@ Consolidated curriculum tree for Python and SQL tracks.
 - [08 Validation Errors And Observability](./api/endpoint-best-practices/08_validation_errors_and_observability.md)
 - [09 Security Authz And Data Exposure](./api/endpoint-best-practices/09_security_authz_and_data_exposure.md)
 - [10 Api Contract Testing And Versioning](./api/endpoint-best-practices/10_api_contract_testing_and_versioning.md)
+
 ## Notes
 - Source repos are preserved individually; this repo provides a single organized tree.
-
+- `.github/workflows/monthly-ai-update.yml` opens a monthly Copilot audit issue to keep lessons current.

@@ -1,2 +1,56 @@
-﻿<!doctype html><html><body><h1>Frontend Solution</h1><p>Loaded from scaffold.</p></body></html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Solution - Frontend Deep Dive</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="hero">
+      <p class="eyebrow">Reference solution</p>
+      <h1>Collector Experience Dashboard</h1>
+      <p class="lede">This solution combines semantic HTML, a responsive CSS system, and vanilla JS that progressively enhances server-rendered Django pages.</p>
+    </header>
 
+    <main class="dashboard">
+      <section class="card" aria-labelledby="health-heading">
+        <div class="card-header">
+          <h2 id="health-heading">API health</h2>
+          <button id="refresh-button" class="button button--ghost" type="button">Refresh</button>
+        </div>
+        <p id="health-status" class="pill pill--loading">Loading...</p>
+      </section>
+
+      <section class="card" aria-labelledby="subscriber-heading">
+        <h2 id="subscriber-heading">Subscriber form</h2>
+        <form id="subscriber-form" novalidate>
+          <label for="subscriber-email">Email</label>
+          <input id="subscriber-email" name="email" type="email" required placeholder="learner@example.com">
+          <p id="subscriber-message" class="helper">Client-side feedback should support, not replace, backend validation.</p>
+          <button class="button" type="submit">Join waitlist</button>
+        </form>
+      </section>
+
+      <section class="card card--wide" aria-labelledby="submission-heading">
+        <div class="card-header">
+          <h2 id="submission-heading">Submission table</h2>
+          <span class="pill pill--info">Hydrated from API-like JSON</span>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Learner</th>
+              <th>Source</th>
+              <th>Score</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="submission-table-body"></tbody>
+        </table>
+      </section>
+    </main>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>

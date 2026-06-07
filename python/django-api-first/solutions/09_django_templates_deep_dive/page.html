@@ -1,2 +1,54 @@
-﻿{% extends 'base.html' %}{% block content %}<h1>Template Deep Dive Solution</h1>{% endblock %}
+{% extends 'base.html' %}
 
+{% block title %}Operations Dashboard{% endblock %}
+
+{% block site_heading %}Operations Dashboard{% endblock %}
+
+{% block breadcrumbs %}
+  <a href="/">Home</a>
+  <span aria-hidden="true">/</span>
+  <a href="/status/">Status</a>
+  <span aria-hidden="true">/</span>
+  <span>Operations dashboard</span>
+{% endblock %}
+
+{% block sidebar %}
+  <section>
+    <h2>Quick actions</h2>
+    <ul>
+      <li><a href="/api/v1/submissions/">Open submissions API</a></li>
+      <li><a href="/admin/backend_api/submission/">Review in admin</a></li>
+      <li><a href="mailto:{{ support_email|default:'ops@example.com' }}">Contact support</a></li>
+    </ul>
+  </section>
+{% endblock %}
+
+{% block content %}
+  <section class="panel">
+    <h2>{{ page_heading|default:"Collector health overview"|title }}</h2>
+    <p>{{ description|default:"This child template inherits layout chrome and focuses only on page-specific content." }}</p>
+    <div class="stats-grid">
+      <article>
+        <h3>Pending jobs</h3>
+        <p>{{ pending_jobs|default:12 }}</p>
+      </article>
+      <article>
+        <h3>API latency</h3>
+        <p>{{ p95_latency_ms|default:180 }} ms</p>
+      </article>
+      <article>
+        <h3>Open incidents</h3>
+        <p>{{ open_incidents|default:0 }}</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h3>Operational notes</h3>
+    <p>{{ runbook_note|default:"Keep layout structure in the base template and move only page-specific stats into child templates." }}</p>
+  </section>
+{% endblock %}
+
+{% block footer %}
+  <small>Release {{ release|default:"2024.09" }} · Environment {{ environment|default:"production"|title }}</small>
+{% endblock %}

@@ -1,0 +1,33 @@
+{
+  "family": "teaching-fastapi",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "512",
+  "memory": "1024",
+  "executionRoleArn": "arn:aws:iam::123456789012:role/ecsTaskExecutionRole",
+  "taskRoleArn": "arn:aws:iam::123456789012:role/teachingAppTaskRole",
+  "containerDefinitions": [
+    {
+      "name": "web",
+      "image": "123456789012.dkr.ecr.us-east-1.amazonaws.com/teaching-fastapi:latest",
+      "essential": true,
+      "portMappings": [
+        {"containerPort": 8000, "hostPort": 8000, "protocol": "tcp"}
+      ],
+      "environment": [
+        {"name": "APP_ENV", "value": "production"}
+      ],
+      "secrets": [
+        {"name": "DATABASE_URL", "valueFrom": "arn:aws:secretsmanager:us-east-1:123456789012:secret:teaching/database"}
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/teaching-fastapi",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      }
+    }
+  ]
+}

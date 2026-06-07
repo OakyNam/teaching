@@ -1,0 +1,32 @@
+{
+  "family": "TODO-family",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "TODO-cpu",
+  "memory": "TODO-memory",
+  "executionRoleArn": "TODO-execution-role",
+  "taskRoleArn": "TODO-task-role",
+  "containerDefinitions": [
+    {
+      "name": "web",
+      "image": "TODO-image",
+      "portMappings": [
+        {"containerPort": 8000, "hostPort": 8000, "protocol": "tcp"}
+      ],
+      "environment": [
+        {"name": "APP_ENV", "value": "TODO"}
+      ],
+      "secrets": [
+        {"name": "DATABASE_URL", "valueFrom": "TODO-secret-arn"}
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "TODO-log-group",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      }
+    }
+  ]
+}
