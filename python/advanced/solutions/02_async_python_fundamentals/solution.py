@@ -16,6 +16,19 @@ async def guarded_fetch(client: PricingClient, sku: str, delay: float, timeout: 
     return await asyncio.wait_for(client.fetch_price(sku, delay, fail=fail), timeout=timeout)
 
 
+def summarize_results(results: list[object]) -> None:
+    successes = [result for result in results if not isinstance(result, Exception)]
+    failures = [type(result).__name__ for result in results if isinstance(result, Exception)]
+    print(f"synced prices: {successes}")
+    print(f"captured failures: {failures}")
+    print(f"successful sync count: {len(successes)}")
+
+
+def explain_pattern() -> None:
+    print("Pattern: wrap awaited calls with wait_for, then gather(return_exceptions=True).")
+    print("This keeps one slow or broken dependency from crashing the whole sync job.")
+
+
 async def sync_catalog() -> None:
     client = PricingClient()
     tasks = [
@@ -25,13 +38,11 @@ async def sync_catalog() -> None:
         guarded_fetch(client, "SKU-400", 0.10, 0.20, fail=True),
     ]
     results = await asyncio.gather(*tasks, return_exceptions=True)
-    successes = [result for result in results if not isinstance(result, Exception)]
-    failures = [type(result).__name__ for result in results if isinstance(result, Exception)]
-    print(f"synced prices: {successes}")
-    print(f"captured failures: {failures}")
+    summarize_results(results)
 
 
 def run() -> None:
+    explain_pattern()
     asyncio.run(sync_catalog())
 
 

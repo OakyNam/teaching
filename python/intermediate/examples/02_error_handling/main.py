@@ -1,4 +1,3 @@
-
 """Demonstrate custom exceptions, re-raising, and cleanup."""
 from __future__ import annotations
 
@@ -36,8 +35,7 @@ def register_guest(name: str, age_text: str) -> None:
         print(f"Registration failed: {exc}")
     finally:
         # finally always runs, which makes it a good place for cleanup.
-        print(f"Cleanup complete for {name}.
-")
+        print(f"Cleanup complete for {name}.\n")
 
 
 

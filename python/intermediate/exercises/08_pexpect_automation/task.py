@@ -11,9 +11,11 @@ except ImportError:  # pragma: no cover - educational fallback
     pexpect = None
 
 
+
 def build_prompt_script() -> str:
     """Return Python code for a two-prompt interactive script."""
     raise NotImplementedError("Your implementation here")
+
 
 
 def automate_prompt_script(name: str, code: str) -> str:
@@ -21,9 +23,11 @@ def automate_prompt_script(name: str, code: str) -> str:
     raise NotImplementedError("Your implementation here")
 
 
+
 def run_shell_check() -> str:
     """Run a simple shell command through pexpect.run and return its output."""
     raise NotImplementedError("Your implementation here")
+
 
 
 def run() -> None:
@@ -31,6 +35,7 @@ def run() -> None:
         print("Install pexpect to complete this exercise.")
         return
     print("Implement the stubs, then call automate_prompt_script('Ava', 'BLUE-42').")
+    print("Bonus: assign a logfile so you can inspect the session transcript.")
 
 
 if __name__ == "__main__":

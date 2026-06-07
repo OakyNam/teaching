@@ -1,4 +1,3 @@
-
 """Demonstrate dataclasses, default factories, and useful type hints."""
 from __future__ import annotations
 

@@ -1,4 +1,3 @@
-
 """Exercise starter for dataclasses and typing.
 
 Model a support ticket with a dataclass, optional owner information, and

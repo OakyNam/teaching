@@ -4,10 +4,12 @@ from __future__ import annotations
 import unittest
 
 
+
 def normalize_scores(raw_scores: list[int]) -> list[int]:
     assert raw_scores, "Need at least one score to normalize."
     highest = max(raw_scores)
     return [round(score / highest * 100) for score in raw_scores]
+
 
 
 def debug_average(scores: list[int]) -> float:
@@ -22,6 +24,10 @@ class NormalizeScoresTests(unittest.TestCase):
 
     def test_order_is_preserved(self) -> None:
         self.assertEqual(normalize_scores([10, 20, 30]), [33, 67, 100])
+
+    def test_average_helper(self) -> None:
+        self.assertAlmostEqual(debug_average([72, 90, 81]), 81.0)
+
 
 
 def main() -> None:

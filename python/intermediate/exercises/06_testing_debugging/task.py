@@ -1,9 +1,10 @@
 """Exercise starter for testing and debugging.
 
-Write a pricing helper, add assertions or unittest checks, and leave a
-clear spot where a student could drop into pdb or breakpoint().
+Write a pricing helper, add assertions or unittest checks, and leave a clear
+spot where a student could drop into pdb or breakpoint().
 """
 from __future__ import annotations
+
 
 
 def calculate_discounted_total(subtotal: float, discount_percent: float) -> float:
@@ -11,9 +12,11 @@ def calculate_discounted_total(subtotal: float, discount_percent: float) -> floa
     raise NotImplementedError("Your implementation here")
 
 
+
 def test_calculate_discounted_total() -> None:
     """Add a few assertions that verify expected pricing behavior."""
     raise NotImplementedError("Your implementation here")
+
 
 
 def debug_cart(items: list[float]) -> float:
@@ -21,9 +24,16 @@ def debug_cart(items: list[float]) -> float:
     raise NotImplementedError("Your implementation here")
 
 
+
 def run() -> None:
     print("Implement the stubs, then call test_calculate_discounted_total() here.")
     print("Sample items:", [12.0, 8.5, 4.5])
+    print("Suggested assertions:")
+    print("- 25% off of 80.0 should be 60.0")
+    print("- invalid discounts should raise an error")
+    print("- an empty cart should trigger a helpful assertion or exception")
+    print("Tip: add breakpoint() inside debug_cart() while diagnosing a failing test.")
+    print("You can also rewrite the checks as a unittest.TestCase if you prefer.")
 
 
 if __name__ == "__main__":

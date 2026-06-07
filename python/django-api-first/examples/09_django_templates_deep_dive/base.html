@@ -1,2 +1,67 @@
-﻿<!doctype html><html><body>{% block content %}{% endblock %}</body></html>
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Collector Console{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'frontend_site/app.css' %}">
+  </head>
+  <body class="shell">
+    <header class="site-header">
+      <div>
+        <p class="eyebrow">{{ environment|default:"teaching" }}</p>
+        <h1>{% block site_heading %}Collector Console{% endblock %}</h1>
+      </div>
+      <nav aria-label="Primary navigation">
+        <a href="/">Dashboard</a>
+        <a href="/status/">Status</a>
+        <a href="/api/v1/health/">API health</a>
+      </nav>
+    </header>
 
+    <div class="layout">
+      <aside class="sidebar">
+        {% block sidebar %}
+          <section>
+            <h2>Shared context</h2>
+            <ul>
+              <li>Release: {{ release|default:"2024.09" }}</li>
+              <li>Operator: {{ request.user|default:"anonymous" }}</li>
+              <li>Theme: {{ theme|default:"clean" }}</li>
+            </ul>
+          </section>
+        {% endblock %}
+      </aside>
+
+      <main class="content">
+        {% if messages %}
+          <ul class="message-list">
+            {% for message in messages %}
+              <li class="message message--{{ message.tags|default:'info' }}">{{ message }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+
+        <nav class="breadcrumbs" aria-label="Breadcrumbs">
+          {% block breadcrumbs %}
+            <a href="/">Home</a>
+          {% endblock %}
+        </nav>
+
+        {% block content %}
+          <section>
+            <h2>Replace this block in a child template</h2>
+            <p>Base templates keep navigation, layout, and alerts in one place.</p>
+          </section>
+        {% endblock %}
+      </main>
+    </div>
+
+    <footer class="site-footer">
+      {% block footer %}
+        <small>Rendered with reusable blocks and shared context.</small>
+      {% endblock %}
+    </footer>
+  </body>
+</html>

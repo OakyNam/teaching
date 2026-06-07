@@ -1,2 +1,56 @@
-﻿<!doctype html><html><body><h1>TODO Build responsive page</h1></body></html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Exercise - Frontend Deep Dive</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="page-header">
+      <p class="eyebrow">Exercise starter</p>
+      <h1>Submission Explorer</h1>
+      <p>Practice semantic HTML, responsive CSS, and vanilla JavaScript in a small teaching page.</p>
+    </header>
 
+    <main class="page-grid">
+      <section class="panel">
+        <h2>Search learners</h2>
+        <form id="filter-form" novalidate>
+          <label for="query">Learner name</label>
+          <input id="query" name="query" type="search" placeholder="Type a learner name">
+          <p id="filter-message" class="hint">Try filtering the table with a partial name.</p>
+          <button type="submit">Apply filter</button>
+        </form>
+      </section>
+
+      <aside class="panel">
+        <h2>Starter goals</h2>
+        <ul>
+          <li>Add empty-state messaging for no search results.</li>
+          <li>Highlight high scores with a CSS class.</li>
+          <li>Replace starter rows with real JSON from a Django endpoint.</li>
+        </ul>
+      </aside>
+
+      <section class="panel panel--wide">
+        <div class="panel-heading">
+          <h2>Recent submissions</h2>
+          <span class="badge">Starter data</span>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Learner</th>
+              <th>Source</th>
+              <th>Score</th>
+            </tr>
+          </thead>
+          <tbody id="results-body"></tbody>
+        </table>
+      </section>
+    </main>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>

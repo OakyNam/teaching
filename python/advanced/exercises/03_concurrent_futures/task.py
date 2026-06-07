@@ -12,21 +12,38 @@ def build_report(report_id: str) -> dict[str, object]:
     return {"report_id": report_id, "rows": len(report_id) * 120}
 
 
+def summarize_reports(reports: list[dict[str, object]]) -> None:
+    ordered = sorted(reports, key=lambda item: item["report_id"])
+    total_rows = sum(int(item["rows"]) for item in ordered)
+    print(f"ordered success list: {ordered}")
+    print(f"total rendered rows: {total_rows}")
+
+
+def estimate_rows(report_id: str) -> int:
+    return len(report_id) * 120
+
+
 def run() -> None:
     report_ids = ["ops-1", "ops-2", "ops-3", "ops-4"]
+    completed_reports: list[dict[str, object]] = []
+    failures: list[str] = []
     with ThreadPoolExecutor(max_workers=3) as executor:
         futures = {executor.submit(build_report, report_id): report_id for report_id in report_ids}
         for future in as_completed(futures):
             report_id = futures[future]
             try:
-                print(f"completed: {future.result()}")
+                report = future.result()
+                completed_reports.append(report)
+                print(f"completed: {report}")
             except Exception as exc:
+                failures.append(report_id)
                 print(f"retry {report_id}: {exc}")
 
-    # Practice ideas:
-    # 1. Swap in ProcessPoolExecutor for a CPU-bound version of build_report.
-    # 2. Add executor.map(...) to keep results aligned with input order.
-    # 3. Capture failures in a separate list for later retries.
+        ordered_rows = list(executor.map(estimate_rows, report_ids))
+    summarize_reports(completed_reports)
+    print(f"map preserves ordering: {list(zip(report_ids, ordered_rows))}")
+    print(f"failed reports: {failures}")
+    print("Next practice: swap in ProcessPoolExecutor for a CPU-bound workflow.")
 
 
 if __name__ == "__main__":

@@ -1,5 +1,6 @@
 """Exercise starter for lesson: 04_backend_api_app."""
 from dataclasses import dataclass
+from textwrap import dedent
 
 
 @dataclass(frozen=True)
@@ -29,11 +30,24 @@ def response_payload(record: IncomingRecord) -> dict[str, object]:
     return {"ok": ok, "errors": errors, "normalized_source": normalize_source(record.source)}
 
 
+def api_view_outline() -> str:
+    return dedent(
+        """
+        class IntakeView(APIView):
+            def post(self, request):
+                serializer = IntakeSerializer(data=request.data)
+                serializer.is_valid(raise_exception=True)
+                return Response(serializer.validated_data, status=201)
+        """
+    ).strip()
+
+
 def run() -> None:
     print("Exercise: implement a serializer and APIView for a DRF backend app.")
     good = IncomingRecord(" Web ", "person@example.com", 1)
     bad = IncomingRecord("desk-phone", "person-at-example.com", -1)
 
+    print(f"- APIView outline: {api_view_outline()}")
     print(f"- Good response: {response_payload(good)}")
     print(f"- Bad response: {response_payload(bad)}")
 

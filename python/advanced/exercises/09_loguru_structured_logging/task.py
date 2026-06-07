@@ -20,11 +20,30 @@ def configure_logger() -> logging.Logger:
     return logger
 
 
+def describe_upgrade_path() -> None:
+    print("Upgrade path:")
+    print("- replace stdlib setup with loguru.add(...) sinks")
+    print("- enable serialize=True for machine-readable logs")
+    print("- bind request_id and customer_id per operation")
+    print("- split INFO and ERROR logs into separate files")
+
+
+def log_invoice_event(logger: logging.Logger, invoice_id: str, status: str) -> None:
+    payload = {
+        "service": "billing",
+        "request_id": "req-204",
+        "invoice_id": invoice_id,
+        "status": status,
+    }
+    logger.info(json.dumps(payload, sort_keys=True))
+
+
 def run() -> None:
     logger = configure_logger()
-    payload = {"service": "billing", "request_id": "req-204", "event": "invoice-generated"}
-    logger.info(json.dumps(payload, sort_keys=True))
-    print("Next practice: add loguru sinks, JSON serialization, and severity-based files.")
+    log_invoice_event(logger, "INV-204", "generated")
+    log_invoice_event(logger, "INV-205", "emailed")
+    print("exercise log file: logs/exercise.log")
+    describe_upgrade_path()
 
 
 if __name__ == "__main__":

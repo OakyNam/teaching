@@ -1,4 +1,3 @@
-
 """Exercise starter for OOP foundations.
 
 Build a course-enrollment class that stores student data on each instance

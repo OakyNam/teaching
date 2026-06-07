@@ -1,4 +1,3 @@
-
 """Reference solution for error handling and custom exceptions."""
 from __future__ import annotations
 

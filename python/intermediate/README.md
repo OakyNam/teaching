@@ -15,6 +15,7 @@ Structured lessons for this track.
 | [10](./10_oop_design_concepts.md) | OOP Design Concepts (Composition, SOLID, and Interfaces) |
 | [11](./11_regex.md) | Python Regex |
 | [12](./12_json.md) | Python JSON |
+| [13](./13_json_manipulation_querying.md) | JSON Manipulation and Querying |
 ## How to Use
 1. Follow lessons in order.
 2. Complete exercises before moving on.

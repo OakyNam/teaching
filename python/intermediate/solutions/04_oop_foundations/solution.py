@@ -1,4 +1,3 @@
-
 """Reference solution for OOP foundations."""
 from __future__ import annotations
 

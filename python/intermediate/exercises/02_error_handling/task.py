@@ -1,8 +1,7 @@
-
 """Exercise starter for error handling.
 
-Create a reservation workflow that validates input, uses a custom
-exception, and guarantees cleanup with finally.
+Create a reservation workflow that validates input, uses a custom exception,
+re-raises with more context, and guarantees cleanup with finally.
 """
 from __future__ import annotations
 
@@ -32,6 +31,11 @@ def save_confirmation(reservation: dict[str, int | str]) -> str:
 
 def run() -> None:
     print("Implement the reservation functions, then call them from run().")
+    print("Try both a valid case and an invalid one.")
+    print("Suggested checks:")
+    print("- numeric parsing for party size")
+    print("- custom ReservationError messages")
+    print("- cleanup output inside a finally block")
     print("Example input: ('Jordan', '4') and ('Taylor', 'many')")
 
 

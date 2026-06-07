@@ -25,6 +25,14 @@ def validate_template_name(template_name: str) -> bool:
     return template_name.startswith("frontend_site/") and template_name.endswith(".html")
 
 
+def template_preview(context: HomeContext) -> str:
+    return (
+        f"<h1>{context.headline}</h1>"
+        f"<p class='badge'>{context.badge_text}</p>"
+        f"<a href='{context.api_link}'>Check API</a>"
+    )
+
+
 def run() -> None:
     print("Exercise: wire a frontend Django app with routes, views, and templates.")
     context = build_home_context(api_ok=True)
@@ -34,6 +42,7 @@ def run() -> None:
     print(f"- Headline: {context.headline}")
     print(f"- Badge: {context.badge_text}")
     print(f"- Route starter: {build_route_pattern('status')}")
+    print(f"- Template preview: {template_preview(context)}")
     print(f"- Good template valid? {validate_template_name(good_template)}")
     print(f"- Bad template valid? {validate_template_name(bad_template)}")
 

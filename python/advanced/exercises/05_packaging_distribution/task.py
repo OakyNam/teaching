@@ -11,6 +11,7 @@ def build_metadata() -> dict[str, object]:
         "dependencies": ["rich>=13.0"],
         "dev_dependencies": ["pytest", "mypy"],
         "scripts": {"course-sync": "course_tools.cli:main"},
+        "description": "Utilities for syncing lesson metadata.",
     }
 
 
@@ -20,6 +21,7 @@ def render_pyproject(metadata: dict[str, object]) -> str:
             "[project]",
             f'name = "{metadata["name"]}"',
             f'version = "{metadata["version"]}"',
+            f'description = "{metadata["description"]}"',
             f'dependencies = {metadata["dependencies"]}',
             "",
             "[project.optional-dependencies]",
@@ -31,12 +33,19 @@ def render_pyproject(metadata: dict[str, object]) -> str:
     )
 
 
+def describe_layout() -> None:
+    print("course_tools/__init__.py -> export __version__")
+    print("course_tools/cli.py -> command-line entry point")
+    print("course_tools/sync.py -> reusable package logic")
+
+
 def run() -> None:
     metadata = build_metadata()
     print(render_pyproject(metadata))
+    describe_layout()
     print("Practice ideas:")
     print("- add another console script")
-    print("- add a description and classifiers")
+    print("- add classifiers and requires-python")
     print("- document python -m build and inspect dist/")
 
 

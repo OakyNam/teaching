@@ -1,8 +1,7 @@
-
 """Exercise starter for file I/O, CSV, and JSON.
 
-Build a small conference-booking workflow that writes CSV input and a JSON
-summary report using context managers.
+Build a small conference-booking workflow that writes CSV input, reads it back,
+and saves a JSON summary report using context managers.
 """
 from __future__ import annotations
 
@@ -31,6 +30,10 @@ def write_manifest_json(path: Path, manifest: dict[str, int]) -> None:
 def run() -> None:
     base_dir = Path(__file__).parent
     print("Suggested files:", base_dir / "bookings.csv", base_dir / "manifest.json")
+    print("Suggested report fields: attendee count and total tickets sold.")
+    print("Hint: csv.writer and json.dump are the key tools for this exercise.")
+    print("Use a try/finally block if you want to clean up files after testing.")
+    print("Then read the JSON file back to confirm the summary was saved correctly.")
 
 
 if __name__ == "__main__":

@@ -1,4 +1,3 @@
-
 """Reference solution for iterators and generators."""
 from __future__ import annotations
 

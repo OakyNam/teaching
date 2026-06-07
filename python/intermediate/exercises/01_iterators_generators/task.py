@@ -1,4 +1,3 @@
-
 """Exercise starter for iterators and generators.
 
 Build a warehouse restocking demo that uses a custom iterator, a generator

@@ -28,10 +28,15 @@ def check_rate_limit(request_count: int, limit: int) -> bool:
     return request_count <= limit
 
 
+def throttle_window(limit: int, window: str) -> str:
+    return f"Allow {limit} requests per {window} before returning HTTP 429."
+
+
 def run() -> None:
     print("Exercise: add JWT claims, serializer validation, and throttling rules.")
     claims = issue_token_claims(7, "mentor", "cohort-3")
     print(f"- Claims: {claims}")
+    print(f"- Window: {throttle_window(60, 'minute')}")
     print(f"- Good signup: {validate_signup('student@example.com', 'SecurePass#2024')}")
     print(f"- Bad signup: {validate_signup('student', 'short')}")
     print(f"- Under limit? {check_rate_limit(4, 10)}")

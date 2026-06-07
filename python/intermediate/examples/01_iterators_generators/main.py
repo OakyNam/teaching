@@ -1,6 +1,7 @@
-
 """Demonstrate custom iterators and generators with realistic study data."""
 from __future__ import annotations
+
+from collections.abc import Iterator
 
 
 class ReadingQueue:
@@ -23,7 +24,7 @@ class ReadingQueue:
         return title
 
 
-def squared_even_numbers(limit: int):
+def squared_even_numbers(limit: int) -> Iterator[int]:
     """Yield square values lazily instead of building a list up front."""
     for number in range(limit):
         if number % 2 == 0:
@@ -41,14 +42,11 @@ def main() -> None:
     for title in queue:
         print(f"- {title}")
 
-    print("
-Generator output:")
+    print("\nGenerator output:")
     for value in squared_even_numbers(8):
         print(value, end=" ")
 
-    print("
-
-Generator expression output:")
+    print("\n\nGenerator expression output:")
     short_titles = (title.upper() for title in queue if len(title) < 18)
     print(list(short_titles))
 

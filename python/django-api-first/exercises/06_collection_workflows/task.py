@@ -20,6 +20,14 @@ def next_run_minutes(rule: BeatRule) -> str:
     return f"every {rule.minutes} minutes -> {rule.task_name}"
 
 
+def beat_preview(rule: BeatRule) -> dict[str, str | int]:
+    return {"task": rule.task_name, "minutes": rule.minutes, "queue": build_queue_name("scheduler")}
+
+
+def redis_note() -> str:
+    return "Redis works well as a Celery broker because it is fast, simple, and supports short-lived queue messages."
+
+
 def run() -> None:
     print("Exercise: design Celery tasks, beat jobs, and duplicate guards.")
     seen = {"web:001", "mobile:002"}
@@ -28,6 +36,8 @@ def run() -> None:
 
     print(f"- Queue: {build_queue_name('Mobile')}")
     print(f"- Schedule: {next_run_minutes(BeatRule(15, 'sync_vendors'))}")
+    print(f"- Beat preview: {beat_preview(BeatRule(30, 'cleanup_locks'))}")
+    print(f"- Broker note: {redis_note()}")
     print(f"- Duplicate? {good}: {should_skip_duplicate(seen, good)}")
     print(f"- Duplicate? {bad}: {should_skip_duplicate(seen, bad)}")
 

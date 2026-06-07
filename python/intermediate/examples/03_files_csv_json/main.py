@@ -1,5 +1,4 @@
-
-"""Demonstrate file handling with plain text, CSV, and JSON."""
+"""Demonstrate file handling with CSV and JSON."""
 from __future__ import annotations
 
 import csv
@@ -51,8 +50,7 @@ def main() -> None:
         print("CSV records:")
         for row in records:
             print(row)
-        print("
-JSON summary:")
+        print("\nJSON summary:")
         print(loaded_summary)
     finally:
         for path in (csv_path, json_path):

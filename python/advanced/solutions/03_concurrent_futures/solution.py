@@ -19,22 +19,31 @@ def render_snapshot(records: int) -> int:
     return total
 
 
+def print_executor_notes() -> None:
+    print("Threads fit blocking I/O; processes fit CPU-heavy work.")
+
+
 def run() -> None:
+    pages: list[dict[str, object]] = []
+    print_executor_notes()
     with ThreadPoolExecutor(max_workers=4) as executor:
         futures = {executor.submit(fetch_page, page): page for page in range(1, 6)}
-        pages: list[dict[str, object]] = []
         for future in as_completed(futures):
             page = futures[future]
             try:
                 pages.append(future.result())
             except Exception as exc:
                 print(f"page={page} failed: {exc}")
-        print(f"downloaded pages: {sorted(pages, key=lambda item: item['page'])}")
+    ordered_pages = sorted(pages, key=lambda item: item["page"])
+    print(f"downloaded pages: {ordered_pages}")
+    print(f"downloaded count: {len(ordered_pages)}")
 
     record_sizes = [40_000, 45_000, 50_000]
     with ProcessPoolExecutor(max_workers=2) as executor:
         snapshots = list(executor.map(render_snapshot, record_sizes))
     print(f"ordered snapshots: {list(zip(record_sizes, snapshots))}")
+    print(f"snapshot batch count: {len(snapshots)}")
+    print("ProcessPoolExecutor works well when the heavy function is picklable.")
 
 
 if __name__ == "__main__":

@@ -1,6 +1,9 @@
 """Exercise starter for lesson: 06_profiling_optimization."""
 from __future__ import annotations
 
+import cProfile
+import io
+import pstats
 import timeit
 import tracemalloc
 from functools import lru_cache
@@ -24,6 +27,14 @@ def summarize_tokens(normalizer) -> dict[str, int]:
     return counts
 
 
+def profile_once() -> None:
+    profiler = cProfile.Profile()
+    profiler.runcall(summarize_tokens, cached_normalize_token)
+    output = io.StringIO()
+    pstats.Stats(profiler, stream=output).sort_stats("cumtime").print_stats(3)
+    print(output.getvalue())
+
+
 def run() -> None:
     baseline = timeit.timeit(lambda: summarize_tokens(normalize_token), number=5)
     optimized = timeit.timeit(lambda: summarize_tokens(cached_normalize_token), number=5)
@@ -34,7 +45,8 @@ def run() -> None:
     current, peak = tracemalloc.get_traced_memory()
     tracemalloc.stop()
     print(f"current={current} peak={peak}")
-    print("Next practice: add cProfile output and compare readability vs speed.")
+    profile_once()
+    print("Next practice: compare readability, cache size, and actual speed gains.")
 
 
 if __name__ == "__main__":

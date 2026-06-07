@@ -1,2 +1,53 @@
-﻿<!doctype html><html><head><link rel='stylesheet' href='styles.css'></head><body><h1>Django Frontend Example</h1><script src='app.js'></script></body></html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Frontend Health Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="hero">
+      <p class="eyebrow">Django frontend example</p>
+      <h1>Frontend Health Dashboard</h1>
+      <p class="lede">Semantic HTML, layered CSS, and progressive JavaScript can make a Django page feel modern without a frontend framework.</p>
+    </header>
 
+    <main class="layout">
+      <section class="card" aria-labelledby="status-heading">
+        <h2 id="status-heading">API health</h2>
+        <p id="status-text" class="status-pill status-pill--loading">Loading status...</p>
+        <button id="refresh-button" class="button" type="button">Refresh status</button>
+      </section>
+
+      <section class="card" aria-labelledby="subscription-heading">
+        <h2 id="subscription-heading">Join updates</h2>
+        <form id="signup-form" novalidate>
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" placeholder="learner@example.com" required>
+          <p id="form-message" class="help-text">Use progressive enhancement for small, useful interactions.</p>
+          <button class="button" type="submit">Subscribe</button>
+        </form>
+      </section>
+
+      <section class="card card--wide" aria-labelledby="table-heading">
+        <div class="card-header">
+          <h2 id="table-heading">Recent submissions</h2>
+          <span class="chip">Mock API data</span>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Source</th>
+              <th>Learner</th>
+              <th>Score</th>
+            </tr>
+          </thead>
+          <tbody id="submission-rows"></tbody>
+        </table>
+      </section>
+    </main>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>

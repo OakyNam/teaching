@@ -1,5 +1,6 @@
 """Exercise starter for lesson: 05_data_models_postgres."""
 from dataclasses import dataclass
+from textwrap import dedent
 
 
 @dataclass(frozen=True)
@@ -20,6 +21,17 @@ def relationship_summary(parent: str, child: str) -> str:
     return f"{child} has a ForeignKey to {parent}, so deleting the parent cascades to its rows."
 
 
+def model_stub() -> str:
+    return dedent(
+        """
+        class Submission(models.Model):
+            batch = models.ForeignKey(CollectionBatch, on_delete=models.CASCADE)
+            score = models.IntegerField()
+            payload = models.JSONField(default=dict)
+        """
+    ).strip()
+
+
 def run() -> None:
     print("Exercise: design Django ORM models with explicit schema choices.")
     rule = ScoreRule(0, 100)
@@ -28,6 +40,7 @@ def run() -> None:
 
     print(f"- Table name: {build_table_name('backend_api', 'Submission')}")
     print(f"- Relationship: {relationship_summary('CollectionBatch', 'Submission')}")
+    print(f"- Model stub: {model_stub()}")
     print(f"- Valid score? {good_score}: {validate_score(rule, good_score)}")
     print(f"- Valid score? {bad_score}: {validate_score(rule, bad_score)}")
 

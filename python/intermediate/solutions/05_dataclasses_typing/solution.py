@@ -1,4 +1,3 @@
-
 """Reference solution for dataclasses and typing."""
 from __future__ import annotations
 

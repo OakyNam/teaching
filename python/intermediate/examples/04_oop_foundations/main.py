@@ -1,4 +1,3 @@
-
 """Demonstrate classes, methods, and class versus instance attributes."""
 from __future__ import annotations
 

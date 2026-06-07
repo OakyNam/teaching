@@ -1,2 +1,50 @@
-﻿{% extends 'base.html' %}{% block content %}<h1>TODO</h1>{% endblock %}
+{% extends 'base.html' %}
 
+{% block title %}Learner Status Board{% endblock %}
+
+{% block breadcrumbs %}
+  <a href="/">Home</a>
+  <span aria-hidden="true">/</span>
+  <span>Learners</span>
+{% endblock %}
+
+{% block sidebar %}
+  <section>
+    <h2>Template tasks</h2>
+    <ul>
+      <li>Create a reusable alert partial.</li>
+      <li>Add a form error include.</li>
+      <li>Move release data into a context processor.</li>
+    </ul>
+  </section>
+{% endblock %}
+
+{% block content %}
+  <section class="panel">
+    <h2>{{ cohort_name|default:"Spring API Cohort"|title }}</h2>
+    <p>{{ intro_text|default:"Use this child template to practice block inheritance and filters." }}</p>
+    <dl>
+      <div>
+        <dt>Pending reviews</dt>
+        <dd>{{ pending_reviews|default:5 }}</dd>
+      </div>
+      <div>
+        <dt>Visible alerts</dt>
+        <dd>{{ alerts|length }}</dd>
+      </div>
+    </dl>
+  </section>
+
+  <section class="panel">
+    <h3>Reusable UI ideas</h3>
+    <ul>
+      <li>Include a shared alert banner above the first panel.</li>
+      <li>Move repeated stat cards into an include.</li>
+      <li>Inject release metadata from a context processor instead of every view.</li>
+    </ul>
+  </section>
+{% endblock %}
+
+{% block footer %}
+  <small>Starter template: extend this page with includes and richer context.</small>
+{% endblock %}

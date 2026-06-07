@@ -34,11 +34,16 @@ def describe_installable_package() -> None:
     print("Legacy setup.py can often disappear once pyproject.toml is complete.")
 
 
+def release_steps() -> None:
+    print("1. python -m build")
+    print("2. inspect dist/*.whl metadata")
+    print("3. publish to an internal index or artifact store")
+
+
 def run() -> None:
     print(build_pyproject())
     describe_installable_package()
-    print("build command: python -m build")
-    print("verification: inspect dist/*.whl metadata after the build completes")
+    release_steps()
 
 
 if __name__ == "__main__":
