@@ -1,6 +1,6 @@
-# Delivery
+# Project Management
 
-Delivery topics cover how the team turns ideas into safe, trackable work.
+Project management topics cover how the team turns ideas into safe, trackable work.
 
 ## Lesson Plan
 | # | Topic |

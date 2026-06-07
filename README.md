@@ -7,13 +7,13 @@ A domain-based learning library for automation engineers, programmers, network o
 - [Cloud](./cloud/README.md) — cloud infrastructure fundamentals plus AWS, GCP, and Azure app operations.
 - [Networking](./networking/README.md) — foundations, services, routing, switching, and QoS.
 - [Voice](./voice/README.md) — VoIP, SIP, RTP, and transport topics.
-- [Delivery](./delivery/README.md) — SDLC habits, Jira usage, and team execution workflows.
+- [Project Management](./project_management/README.md) — SDLC habits, Jira usage, and team execution workflows.
 
 ## Recommended Starting Paths
 ### For network engineers building automation skills
 1. [Coding / Python Basics](./coding/python/basics/README.md)
 2. [Coding / API REST](./coding/api/rest/README.md)
-3. [Delivery / SDLC for Automators](./delivery/01_sdlc_for_automators.md)
+3. [Project Management / SDLC for Automators](./project_management/01_sdlc_for_automators.md)
 
 ### For programmers closing networking and voice gaps
 1. [Networking / Networking Overview](./networking/00_networking_overview.md)
@@ -25,7 +25,7 @@ A domain-based learning library for automation engineers, programmers, network o
 2. [Cloud](./cloud/README.md)
 3. [Networking](./networking/README.md)
 4. [Voice](./voice/README.md)
-5. [Delivery](./delivery/README.md)
+5. [Project Management](./project_management/README.md)
 
 ## Notes
 - The repository is organized by operational domain instead of language-only silos.
