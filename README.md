@@ -4,7 +4,7 @@ A domain-based learning library for automation engineers, programmers, network o
 
 ## Root Domains
 - [Coding](./coding/README.md) — Python, SQL, APIs, and automation tooling.
-- [Cloud](./cloud/README.md) — cloud infrastructure topics, starting with AWS.
+- [Cloud](./cloud/README.md) — cloud infrastructure fundamentals plus AWS, GCP, and Azure app operations.
 - [Networking](./networking/README.md) — foundations, services, routing, switching, and QoS.
 - [Voice](./voice/README.md) — VoIP, SIP, RTP, and transport topics.
 - [Delivery](./delivery/README.md) — SDLC habits, Jira usage, and team execution workflows.

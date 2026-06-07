@@ -68,7 +68,7 @@ def main() -> None:
     claims = decode_token(token)
     record = {'id': 42, 'email': 'user@example.com', 'ssn': '123-45-6789', 'name': 'Nina'}
     print('Claims:', claims)
-    print('Using secret from env:', SECRET)
+    print('Secret loaded from environment:', bool(os.getenv('JWT_SECRET')))
     print('Can view finance dashboard:', authorize(claims, 'analyst'))
     print('Masked response:', mask_user_record(record, claims['role']))
 

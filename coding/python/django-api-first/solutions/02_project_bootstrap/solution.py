@@ -8,7 +8,7 @@ from textwrap import dedent
 class EnvironmentSettings:
     debug: bool
     allowed_hosts: list[str]
-    secret_key_source: str
+    uses_env_secret: bool
 
 
 def load_environment(raw_debug: str, raw_hosts: str, raw_secret: str | None) -> EnvironmentSettings:
@@ -16,7 +16,7 @@ def load_environment(raw_debug: str, raw_hosts: str, raw_secret: str | None) -> 
     return EnvironmentSettings(
         debug=raw_debug.lower() == "true",
         allowed_hosts=hosts or ["localhost"],
-        secret_key_source="env" if raw_secret else "development fallback",
+        uses_env_secret=bool(raw_secret),
     )
 
 
@@ -42,15 +42,17 @@ def run() -> None:
     env = load_environment("false", "example.com,api.example.com", os.getenv("DJANGO_SECRET_KEY"))
     print("Bootstrap script:")
     print(bootstrap_script())
-    print("\nResolved settings preview:")
+    print()
+    print("Resolved settings preview:")
     print(f"- DEBUG: {env.debug}")
     print(f"- ALLOWED_HOSTS: {env.allowed_hosts}")
-    print(f"- SECRET_KEY source: {env.secret_key_source}")
+    print(f"- Uses env secret: {env.uses_env_secret}")
 
     assert command_success_case("python manage.py migrate") is True
     assert command_success_case("python manage.py flush") is False
-    assert "api.example.com" in env.allowed_hosts
-    print("\nValidation: one expected pass and one expected fail path were checked.")
+    assert any(host == "api.example.com" for host in env.allowed_hosts)
+    print()
+    print("Validation: one expected pass and one expected fail path were checked.")
 
 
 if __name__ == "__main__":
