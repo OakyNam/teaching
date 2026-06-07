@@ -13,7 +13,7 @@ REPO_URI="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPOSITORY
 IMAGE_URI="${REPO_URI}:${IMAGE_TAG}"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(cd "${SCRIPT_DIR}/../../../.." && pwd)"
-TEMPLATE_PATH="${PROJECT_ROOT}/aws/ecs/examples/01_task_definition/task_definition.json"
+TEMPLATE_PATH="${PROJECT_ROOT}/cloud/aws/ecs/examples/01_task_definition/task_definition.json"
 RENDERED_PATH="${SCRIPT_DIR}/rendered-task-definition.json"
 
 command -v aws >/dev/null
@@ -25,7 +25,7 @@ aws ecr get-login-password --region "${AWS_REGION}" \
   | docker login --username AWS --password-stdin "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com"
 
 echo "Building image ${IMAGE_URI}..."
-docker build -t "${IMAGE_URI}" -f "${PROJECT_ROOT}/aws/ecs/examples/03_dockerfile/Dockerfile" "${PROJECT_ROOT}"
+docker build -t "${IMAGE_URI}" -f "${PROJECT_ROOT}/cloud/aws/ecs/examples/03_dockerfile/Dockerfile" "${PROJECT_ROOT}"
 
 echo "Pushing image..."
 docker push "${IMAGE_URI}"
