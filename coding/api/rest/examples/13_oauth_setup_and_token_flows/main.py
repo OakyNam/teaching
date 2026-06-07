@@ -44,8 +44,8 @@ def main() -> None:
     load_env_file(Path(__file__).resolve().parents[2] / '.env')
     print('Authorization URL:')
     print(build_authorization_url())
-    print('
-Token request payload:')
+    print()
+    print('Token request payload:')
     print(token_request_payload())
 
 

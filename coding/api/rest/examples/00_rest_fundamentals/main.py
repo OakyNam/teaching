@@ -123,8 +123,8 @@ def make_request(base_url: str, method: str, path: str, *, body: dict[str, Any] 
     if data is not None:
         headers['Content-Type'] = 'application/json'
     request = Request(f'{base_url}{path}', data=data, method=method, headers=headers)
-    print(f'
-> {method} {path}')
+    print()
+    print(f'> {method} {path}')
     print('> Request headers:', headers)
     if body is not None:
         print('> Request body:', body)
