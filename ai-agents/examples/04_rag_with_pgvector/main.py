@@ -1,81 +1,49 @@
-"""Small RAG demo with mock embeddings and pgvector schema notes."""
-
+"""Simple retrieval demo over small teaching snippets."""
 from __future__ import annotations
 
-import math
-from dataclasses import dataclass
-from typing import Iterable, List, Sequence, Tuple
+from collections import Counter
+from math import sqrt
 
-try:
-    from sentence_transformers import SentenceTransformer  # type: ignore
-except ImportError:  # pragma: no cover - optional dependency
-    SentenceTransformer = None
-
-
-DOCUMENTS = [
-    "python/intermediate teaches iterators, typing, and testing.",
-    "aws/rds focuses on PostgreSQL operations, backups, and tuning.",
-    "ai-agents covers tool use, LangGraph, and RAG workflows.",
-]
-
-PGVECTOR_SCHEMA = """
-CREATE EXTENSION IF NOT EXISTS vector;
-CREATE TABLE lesson_chunks (
-    id bigserial PRIMARY KEY,
-    lesson_path text NOT NULL,
-    content text NOT NULL,
-    embedding vector(8) NOT NULL
-);
-CREATE INDEX lesson_chunks_embedding_idx ON lesson_chunks USING ivfflat (embedding vector_cosine_ops);
-""".strip()
+DOCUMENTS = {
+    'python-basics': "python/basics covers environment setup, core syntax, and modules.",
+    'sqlalchemy-pooling': "sql/sqlalchemy-postgres covers SQLAlchemy sessions, pooling, and production patterns.",
+    'aws-rds': "cloud/aws/rds focuses on PostgreSQL operations, backups, and tuning.",
+    'agent-tools': "ai-agents lessons cover tool calling, workflow orchestration, and retrieval patterns.",
+}
 
 
-@dataclass
-class SearchResult:
-    document: str
-    score: float
+def tokenize(text: str) -> list[str]:
+    return [word.strip('.,').lower() for word in text.split() if word.strip('.,')]
 
 
-def mock_embed(text: str, size: int = 8) -> List[float]:
-    values = [0.0] * size
-    for index, char in enumerate(text.lower()):
-        values[index % size] += (ord(char) % 31) / 31
-    norm = math.sqrt(sum(value * value for value in values)) or 1.0
-    return [value / norm for value in values]
+def vectorize(text: str) -> Counter[str]:
+    return Counter(tokenize(text))
 
 
-def embed(text: str) -> List[float]:
-    if SentenceTransformer is None:
-        return mock_embed(text)
-    model = SentenceTransformer("all-MiniLM-L6-v2")
-    return list(model.encode(text))
+def cosine_similarity(left: Counter[str], right: Counter[str]) -> float:
+    terms = set(left) | set(right)
+    numerator = sum(left[term] * right[term] for term in terms)
+    left_norm = sqrt(sum(value * value for value in left.values()))
+    right_norm = sqrt(sum(value * value for value in right.values()))
+    if left_norm == 0 or right_norm == 0:
+        return 0.0
+    return numerator / (left_norm * right_norm)
 
 
-def cosine_similarity(left: Sequence[float], right: Sequence[float]) -> float:
-    return sum(a * b for a, b in zip(left, right))
-
-
-def retrieve(query: str, docs: Iterable[str]) -> List[SearchResult]:
-    query_embedding = embed(query)
-    scored = [SearchResult(document=doc, score=cosine_similarity(query_embedding, embed(doc))) for doc in docs]
-    return sorted(scored, key=lambda item: item.score, reverse=True)
-
-
-def answer_question(query: str) -> Tuple[str, List[SearchResult]]:
-    results = retrieve(query, DOCUMENTS)[:2]
-    context = " ".join(result.document for result in results)
-    answer = f"Based on retrieved context: {context}"
-    return answer, results
+def search(query: str) -> list[tuple[str, float]]:
+    query_vector = vectorize(query)
+    scored = []
+    for name, text in DOCUMENTS.items():
+        score = cosine_similarity(query_vector, vectorize(text))
+        scored.append((name, score))
+    return sorted(scored, key=lambda item: item[1], reverse=True)
 
 
 def main() -> None:
-    query = "Which section teaches AWS database operations?"
-    answer, results = answer_question(query)
-    print(PGVECTOR_SCHEMA)
-    print(answer)
-    for result in results:
-        print(f"- {result.score:.3f} :: {result.document}")
+    query = "Where do I learn about connection pooling?"
+    for name, score in search(query):
+        print(f"{name}: {score:.3f}")
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

@@ -1,6 +1,6 @@
 # Teaching
 
-Consolidated curriculum tree for Python, SQL, AWS, and AI agent tracks.
+Consolidated curriculum tree for Python, SQL, cloud, API, networking, and AI agent tracks.
 
 ## Python
 - [basics](./python/basics/README.md)
@@ -12,10 +12,22 @@ Consolidated curriculum tree for Python, SQL, AWS, and AI agent tracks.
 - [basics](./sql/basics/README.md)
 - [sqlalchemy-postgres](./sql/sqlalchemy-postgres/README.md)
 
-## AWS
-- [aws](./aws/README.md)
-- [rds](./aws/rds/README.md)
-- [ecs](./aws/ecs/README.md)
+## Cloud
+- [cloud](./cloud/README.md)
+- [aws](./cloud/aws/README.md)
+- [rds](./cloud/aws/rds/README.md)
+- [ecs](./cloud/aws/ecs/README.md)
+
+## API
+- [api](./api/README.md)
+- [rest](./api/rest/README.md)
+- [soap](./api/soap/README.md)
+
+## Network
+- [network](./network/README.md)
+- [fundamentals](./network/fundamentals/README.md)
+- [routing-switching](./network/routing-switching/README.md)
+- [qos](./network/qos/README.md)
 
 ## AI Agents
 - [ai-agents](./ai-agents/README.md)
@@ -87,17 +99,44 @@ Consolidated curriculum tree for Python, SQL, AWS, and AI agent tracks.
 - [06 Pooling Prod Config](./sql/sqlalchemy-postgres/06_pooling_prod_config.md)
 - [07 Sql Injection Protection](./sql/sqlalchemy-postgres/07_sql_injection_protection.md)
 
-### AWS RDS
-- [01 Rds Overview](./aws/rds/01_rds_overview.md)
-- [02 Creating Rds Instance](./aws/rds/02_creating_rds_instance.md)
-- [03 Connecting And Operations](./aws/rds/03_connecting_and_operations.md)
-- [04 Rds Best Practices](./aws/rds/04_rds_best_practices.md)
+### Cloud AWS RDS
+- [01 Rds Overview](./cloud/aws/rds/01_rds_overview.md)
+- [02 Creating Rds Instance](./cloud/aws/rds/02_creating_rds_instance.md)
+- [03 Connecting And Operations](./cloud/aws/rds/03_connecting_and_operations.md)
+- [04 Rds Best Practices](./cloud/aws/rds/04_rds_best_practices.md)
 
-### AWS ECS
-- [01 Ecs Overview](./aws/ecs/01_ecs_overview.md)
-- [02 Task Definitions](./aws/ecs/02_task_definitions.md)
-- [03 Deploying Services](./aws/ecs/03_deploying_services.md)
-- [04 Ecs Best Practices](./aws/ecs/04_ecs_best_practices.md)
+### Cloud AWS ECS
+- [01 Ecs Overview](./cloud/aws/ecs/01_ecs_overview.md)
+- [02 Task Definitions](./cloud/aws/ecs/02_task_definitions.md)
+- [03 Deploying Services](./cloud/aws/ecs/03_deploying_services.md)
+- [04 Ecs Best Practices](./cloud/aws/ecs/04_ecs_best_practices.md)
+
+### API REST
+- [00 Rest Fundamentals](./api/rest/00_rest_fundamentals.md)
+- [01 Api Design Principles And Resource Modeling](./api/rest/01_api_design_principles.md)
+- [02 Pagination Limit Offset Cursor](./api/rest/02_pagination_limit_offset_cursor.md)
+- [03 Search Filter Sort For Dashboards](./api/rest/03_search_filter_sort_for_dashboards.md)
+- [04 Field Selection And Response Shaping](./api/rest/04_field_selection_and_response_shaping.md)
+- [05 Indexing Query Plans And Db Patterns](./api/rest/05_indexing_query_plans_and_db_patterns.md)
+- [06 Caching Conditional Requests Etags](./api/rest/06_caching_conditional_requests_etags.md)
+- [07 Rate Limits Timeouts And Resilience](./api/rest/07_rate_limits_timeouts_and_resilience.md)
+- [08 Validation Errors And Observability](./api/rest/08_validation_errors_and_observability.md)
+- [09 Security Authz And Data Exposure](./api/rest/09_security_authz_and_data_exposure.md)
+- [10 Api Contract Testing And Versioning](./api/rest/10_api_contract_testing_and_versioning.md)
+- [11 Environment Variables And Secret Management](./api/rest/11_environment_variables_and_secret_management.md)
+- [12 Building Api Clients And Connection Pooling](./api/rest/12_building_api_clients_and_connection_pooling.md)
+- [13 Oauth Setup And Token Flows](./api/rest/13_oauth_setup_and_token_flows.md)
+
+### API SOAP
+- [00 Soap Basics](./api/soap/00_soap_basics.md)
+
+### Network Learning
+- [00 Networking Overview](./network/00_networking_overview.md)
+- [01 Subnetting For Programmers](./network/fundamentals/01_subnetting_for_programmers.md)
+- [02 Common Port Numbers](./network/fundamentals/02_common_port_numbers.md)
+- [03 Access Control Lists](./network/fundamentals/03_access_control_lists.md)
+- [01 Routing And Switching Basics](./network/routing-switching/01_routing_and_switching_basics.md)
+- [01 Qos Foundations](./network/qos/01_qos_foundations.md)
 
 ### AI Agents
 - [01 Agentic Concepts](./ai-agents/01_agentic_concepts.md)
@@ -105,21 +144,6 @@ Consolidated curriculum tree for Python, SQL, AWS, and AI agent tracks.
 - [03 Building Agents In A Webapp](./ai-agents/03_building_agents_in_webapp.md)
 - [04 Agentic Workflows With LangGraph](./ai-agents/04_agentic_workflows_with_langgraph.md)
 - [05 Rag And Knowledge Agents](./ai-agents/05_rag_and_knowledge_agents.md)
-
-## API
-- [endpoint-best-practices](./api/endpoint-best-practices/README.md)
-
-### API Endpoint Best Practices
-- [01 Api Design Principles And Resource Modeling](./api/endpoint-best-practices/01_api_design_principles.md)
-- [02 Pagination Limit Offset Cursor](./api/endpoint-best-practices/02_pagination_limit_offset_cursor.md)
-- [03 Search Filter Sort For Dashboards](./api/endpoint-best-practices/03_search_filter_sort_for_dashboards.md)
-- [04 Field Selection And Response Shaping](./api/endpoint-best-practices/04_field_selection_and_response_shaping.md)
-- [05 Indexing Query Plans And Db Patterns](./api/endpoint-best-practices/05_indexing_query_plans_and_db_patterns.md)
-- [06 Caching Conditional Requests Etags](./api/endpoint-best-practices/06_caching_conditional_requests_etags.md)
-- [07 Rate Limits Timeouts And Resilience](./api/endpoint-best-practices/07_rate_limits_timeouts_and_resilience.md)
-- [08 Validation Errors And Observability](./api/endpoint-best-practices/08_validation_errors_and_observability.md)
-- [09 Security Authz And Data Exposure](./api/endpoint-best-practices/09_security_authz_and_data_exposure.md)
-- [10 Api Contract Testing And Versioning](./api/endpoint-best-practices/10_api_contract_testing_and_versioning.md)
 
 ## Notes
 - Source repos are preserved individually; this repo provides a single organized tree.
