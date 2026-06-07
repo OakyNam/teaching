@@ -61,17 +61,12 @@ def build_database_url() -> str:
     return f"sqlite:///{sqlite_path}"
 
 
-def display_database_target(database_url: str) -> str:
+def database_target_label(database_url: str) -> str:
     if database_url.startswith('sqlite'):
-        return database_url
-    if '://' not in database_url:
-        return 'configured database target'
-    scheme, remainder = database_url.split('://', 1)
-    if '@' in remainder:
-        _, destination = remainder.rsplit('@', 1)
-    else:
-        destination = remainder
-    return f'{scheme}://***@{destination}'
+        return 'local sqlite demo'
+    if database_url.startswith('postgresql'):
+        return 'configured PostgreSQL target'
+    return 'configured database target'
 
 
 def test_psycopg2_connection(database_url: str) -> None:
@@ -161,7 +156,7 @@ def run_sqlalchemy_demo(database_url: str) -> None:
 
 def main() -> None:
     database_url = build_database_url()
-    print(f"Using database target: {display_database_target(database_url)}")
+    print(f"Using database target: {database_target_label(database_url)}")
     try:
         test_psycopg2_connection(database_url)
         run_sqlalchemy_demo(database_url)

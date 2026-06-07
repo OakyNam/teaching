@@ -8,15 +8,13 @@ from textwrap import dedent
 class EnvironmentSettings:
     debug: bool
     allowed_hosts: list[str]
-    uses_env_secret: bool
 
 
-def load_environment(raw_debug: str, raw_hosts: str, raw_secret: str | None) -> EnvironmentSettings:
+def load_environment(raw_debug: str, raw_hosts: str, _raw_secret: str | None) -> EnvironmentSettings:
     hosts = [host.strip() for host in raw_hosts.split(",") if host.strip()]
     return EnvironmentSettings(
         debug=raw_debug.lower() == "true",
         allowed_hosts=hosts or ["localhost"],
-        uses_env_secret=bool(raw_secret),
     )
 
 
@@ -46,7 +44,6 @@ def run() -> None:
     print("Resolved settings preview:")
     print(f"- DEBUG: {env.debug}")
     print(f"- ALLOWED_HOSTS: {env.allowed_hosts}")
-    print(f"- Uses env secret: {env.uses_env_secret}")
 
     assert command_success_case("python manage.py migrate") is True
     assert command_success_case("python manage.py flush") is False
