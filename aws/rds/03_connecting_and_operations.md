@@ -13,7 +13,7 @@ conn = psycopg2.connect(
     port=5432,
     dbname="teaching",
     user="app_user",
-    ******
+    password="<password>",
     sslmode="require",
 )
 ```

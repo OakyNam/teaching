@@ -104,7 +104,7 @@ class RestDemoHandler(BaseHTTPRequestHandler):
 
 
 def make_request(base_url: str, method: str, path: str, *, body: dict[str, Any] | None = None) -> None:
-    headers = {'Accept': 'application/json', 'Authorization': '******'}
+    headers = {'Accept': 'application/json', 'Authorization': 'Bearer <token>'}
     data = None if body is None else json.dumps(body).encode('utf-8')
     if data is not None:
         headers['Content-Type'] = 'application/json'
