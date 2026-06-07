@@ -13,6 +13,8 @@ Structured lessons for this track.
 | [08](./08_pexpect_automation.md) | pexpect Automation |
 | [09](./09_inheritance_polymorphism_encapsulation.md) | Inheritance, Polymorphism, and Encapsulation |
 | [10](./10_oop_design_concepts.md) | OOP Design Concepts (Composition, SOLID, and Interfaces) |
+| [11](./11_regex.md) | Python Regex |
+| [12](./12_json.md) | Python JSON |
 ## How to Use
 1. Follow lessons in order.
 2. Complete exercises before moving on.

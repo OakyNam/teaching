@@ -1,0 +1,8 @@
+2026-06-07 18:00:12,573 INFO {"env": "dev", "level_name": "INFO", "message": "starting order sync", "order_id": "ORD-1001", "request_id": "e3b47eb8", "service": "checkout"}
+2026-06-07 18:00:12,573 INFO {"env": "dev", "level_name": "INFO", "message": "order synced", "order_id": "ORD-1001", "request_id": "e3b47eb8", "service": "checkout"}
+2026-06-07 18:00:12,573 INFO {"env": "dev", "level_name": "INFO", "message": "starting order sync", "order_id": "ORD-1002", "request_id": "674166d8", "service": "checkout"}
+2026-06-07 18:00:12,573 ERROR {"env": "dev", "level_name": "ERROR", "message": "order sync failed", "order_id": "ORD-1002", "request_id": "674166d8", "service": "checkout"}
+Traceback (most recent call last):
+  File "/tmp/workspace/OakyNam/teaching/python/advanced/examples/09_loguru_structured_logging/main.py", line 61, in process_order
+    raise ValueError("payment verification failed")
+ValueError: payment verification failed

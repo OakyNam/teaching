@@ -1,6 +1,41 @@
-﻿"""Exercise starter for lesson: 06_profiling_optimization"""
-# TODO: Implement the exercise requirements from 06_profiling_optimization.md.
+"""Exercise starter for lesson: 06_profiling_optimization."""
+from __future__ import annotations
+
+import timeit
+import tracemalloc
+from functools import lru_cache
+
+
+def normalize_token(token: str) -> str:
+    return token.strip().lower().replace("-", "_")
+
+
+@lru_cache(maxsize=None)
+def cached_normalize_token(token: str) -> str:
+    return normalize_token(token)
+
+
+def summarize_tokens(normalizer) -> dict[str, int]:
+    tokens = ["Premium-Plan", "premium_plan", "FREE", "free", "Premium-Plan"] * 400
+    counts: dict[str, int] = {}
+    for token in tokens:
+        normalized = normalizer(token)
+        counts[normalized] = counts.get(normalized, 0) + 1
+    return counts
+
+
 def run() -> None:
-    raise NotImplementedError("Complete this exercise")
+    baseline = timeit.timeit(lambda: summarize_tokens(normalize_token), number=5)
+    optimized = timeit.timeit(lambda: summarize_tokens(cached_normalize_token), number=5)
+    print(f"baseline={baseline:.4f}s optimized={optimized:.4f}s")
+
+    tracemalloc.start()
+    summarize_tokens(cached_normalize_token)
+    current, peak = tracemalloc.get_traced_memory()
+    tracemalloc.stop()
+    print(f"current={current} peak={peak}")
+    print("Next practice: add cProfile output and compare readability vs speed.")
+
+
 if __name__ == "__main__":
     run()

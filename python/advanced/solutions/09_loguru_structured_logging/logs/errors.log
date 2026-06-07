@@ -1,0 +1,3 @@
+2026-06-07 18:00:13,965 INFO {"batch_id": "batch-77", "env": "prod", "message": "shipment export started", "request_id": "68ad83b8", "service": "fulfillment", "severity": "info"}
+2026-06-07 18:00:13,965 INFO {"batch_id": "batch-77", "env": "prod", "message": "shipment export finished", "records": 128, "request_id": "68ad83b8", "service": "fulfillment", "severity": "info"}
+2026-06-07 18:00:13,965 ERROR {"batch_id": "batch-77", "env": "prod", "message": "sample error event", "reason": "demonstration", "request_id": "68ad83b8", "service": "fulfillment", "severity": "error"}
